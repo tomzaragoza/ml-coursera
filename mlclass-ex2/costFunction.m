@@ -21,8 +21,21 @@ grad = zeros(size(theta));
 %
 
 
+hypothesis = X * theta;
+
+for i=1:m,
+	c = sigmoid(hypothesis(i));
+	J = J + (-y(i) * log(c) - (1 - y(i)) * log(1 - c));
+end
+
+J = J ./ m;
 
 
+for i=1:m,
+	grad = grad + (sigmoid(hypothesis(i)) - y(i)) .* X(i, :)';
+end
+
+grad = grad ./ m;
 
 
 
